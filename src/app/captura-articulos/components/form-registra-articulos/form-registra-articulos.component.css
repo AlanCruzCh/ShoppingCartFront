@@ -1,0 +1,210 @@
+.container-principal{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+
+.form-container{
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: rgba(250, 250, 250, 0.95);
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  height: 90%;
+}
+
+.titular{
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  line-height: 1;
+  position: relative;
+  z-index: 100;
+  padding: 20px 10px;
+  width: 100%;
+  height: 10%;
+}
+
+.form{
+  width: 100%;
+  height: 100%;
+}
+
+.formulario{
+  width: 100%;
+  height: 90%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.buttons-container{
+  width: 100%;
+  height: 10%;
+  padding: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form-input{
+  width: 80%;
+  color: black;
+}
+
+.matInput.input-custom{
+  background-color: white;
+}
+
+.section-data, .section-img{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.button-upload, .img-upload{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-upload img{
+  width: 50%;
+  height: 90%;
+}
+
+.oculta-input{
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .form-container{
+    width: 70vw;
+    height: 40vh;
+  }
+
+  .section-img{
+    width: 50%;
+    height: 100%;
+  }
+
+  .section-data{
+    width: 50%;
+    height: 100%;
+  }
+
+  .img-upload{
+    width: 100%;
+    height: 70%;
+  }
+
+  .button-upload{
+    width: 100%;
+    height: 30%;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+  .form-container{
+    width: 80vw;
+    height: 60vh;
+  }
+
+  .section-img{
+    width: 50%;
+    height: 100%;
+  }
+
+  .section-data{
+    width: 50%;
+    height: 100%;
+  }
+
+  .img-upload{
+    width: 100%;
+    height: 70%;
+  }
+
+  .button-upload{
+    width: 100%;
+    height: 30%;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+
+  .form-container{
+    width: 70vw;
+    height: 80vh;
+  }
+
+  .formulario{
+    flex-direction: column;
+  }
+
+  .section-img{
+    width: 100%;
+    height: 50%;
+  }
+
+  .img-upload{
+    width: 100%;
+    height: 70%;
+  }
+
+  .button-upload{
+    width: 100%;
+    height: 30%;
+  }
+
+  .section-data{
+    width: 100%;
+    height: 50%;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  .form-container{
+    width: 70vw;
+    height: 80vh;
+  }
+
+  .formulario{
+    flex-direction: column;
+  }
+
+  .section-img{
+    width: 100%;
+    height: 45%;
+  }
+
+  .img-upload{
+    width: 100%;
+    height: 70%;
+  }
+
+  .button-upload{
+    width: 100%;
+    height: 30%;
+  }
+  .section-data{
+    width: 100%;
+    height: 55%;
+
+  }
+
+}

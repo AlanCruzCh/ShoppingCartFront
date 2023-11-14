@@ -1,1 +1,72 @@
+<div class="container-principal">
 
+  <h1 class="titular">
+    Formulario de registro de articulos
+  </h1>
+
+  <div class="form-container" [formGroup]="formRegistraArticulos">
+
+    <form class="form" (submit)="gurdaDatosForm()">
+
+      <div class="formulario">
+
+        <div class="section-img">
+
+          <div class="img-upload">
+            <img [src]="imgLoadFromNavegator" *ngIf="imgLoadFromNavegator">
+          </div>
+
+          <div class="button-upload">
+            <button type="button" (click)="activaInput()" mat-mini-fab color="primary">
+              <mat-icon>add_photo_alternate</mat-icon>
+            </button>
+          </div>
+
+        </div>
+
+        <div class="section-data">
+
+          <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" name="cantidad" id="cantidad" placeholder="" formControlName="cantidad" class="input-custom">
+            <mat-error *ngIf="validaCampoForm('cantidad')"> {{ obtenerError('cantidad') }} </mat-error>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="always" class="form-input">
+            <mat-label>Costo</mat-label>
+            <input matInput type="number" class="example-right-align" name="costo" id="costo" placeholder="0" formControlName="costo" class="input-custom">
+            <span matTextPrefix>$&nbsp;</span>
+            <mat-error *ngIf="validaCampoForm('costo')"> {{ obtenerError('costo') }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-input">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="description" name="description" id="description" class="input-custom"></textarea>
+            <mat-error *ngIf="validaCampoForm('costo')"> {{ obtenerError('description') }}</mat-error>
+          </mat-form-field>
+
+        </div>
+
+
+        <input type="file" #inputImgUploading name="inputImgUploading" id="inputImgUploading" (change)="cargandoImg($event)" formControlName="inputImgUploading" class="oculta-input">
+
+      </div>
+
+      <div class="buttons-container">
+        <div class="example-button-row">
+          <button type="submit" mat-raised-button color="primary" class="button-custom">Guardar</button>
+        </div>
+        <div class="example-button-row">
+          <button type="button" mat-raised-button color="primary" class="button-custom" (click)="limpiaFormulario()">Limpiar</button>
+        </div>
+        <div class="example-button-row">
+          <button type="button" mat-raised-button color="primary" class="button-custom" [routerLink]="['/inicio']">Inicio</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+</div>

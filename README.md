@@ -28,3 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## Intall dependencies 
+
+Swet Alert 2 ejecute npm install sweetalert2 --save
