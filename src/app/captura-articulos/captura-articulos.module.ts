@@ -6,6 +6,7 @@ import { CapturaArticulosRoautingModule } from './captura-articulos-roauting.mod
 import { FormRegistraArticulosComponent } from './components/form-registra-articulos/form-registra-articulos.component';
 import { MaterialAngularModule } from '../material-angular/material-angular.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [

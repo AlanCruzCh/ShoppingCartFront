@@ -1,6 +1,6 @@
 export interface newArticule{
   cantidad: number,
-  costo: number,
-  descripcion: string;
-  imagen: ArrayBuffer;
+  precio: number,
+  description: string;
+  fotografia: string;
 }

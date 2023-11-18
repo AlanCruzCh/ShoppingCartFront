@@ -8,6 +8,8 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MaterialAngularModule } from './material-angular/material-angular.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpInterceptionService } from './services/http-interception.service';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,11 @@ import { MaterialAngularModule } from './material-angular/material-angular.modul
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialAngularModule,
+    HttpClientModule,
   ],
   providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptionService, multi: true},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   bootstrap: [AppComponent],

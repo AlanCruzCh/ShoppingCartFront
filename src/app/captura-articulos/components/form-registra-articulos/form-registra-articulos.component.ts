@@ -1,9 +1,8 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import Swal, { SweetAlertIcon } from 'sweetalert2';
-
 import { newArticule } from 'src/app/interfaces/formNewArticule.interfaces';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'captura-articulos-form-registra-articulos',
@@ -14,7 +13,9 @@ export class FormRegistraArticulosComponent {
 
   @Output()
   public dataFormulario = new EventEmitter<newArticule>();
+
   @ViewChild('inputImgUploading') fileInput!: ElementRef;
+
   public imgLoadFromNavegator!: any;
   public formRegistraArticulos: FormGroup = this.fb.group({
     cantidad: [ '', [Validators.required ] ],
@@ -26,6 +27,7 @@ export class FormRegistraArticulosComponent {
 
   constructor (
     private fb: FormBuilder,
+    private alertService: AlertService,
   ) { }
 
   public activaInput(): void{
@@ -46,7 +48,7 @@ export class FormRegistraArticulosComponent {
       };
       reader.readAsArrayBuffer(file);
     } else {
-      this.alertaError('Por favor, selecciona un archivo de imagen con extensión PNG o png', 'warning');
+      this.alertService.alertaError('Por favor, selecciona un archivo de imagen con extensión PNG o png', 'warning');
     }
   }
 
@@ -73,10 +75,15 @@ export class FormRegistraArticulosComponent {
   public gurdaDatosForm(): void {
     if( this.formRegistraArticulos.invalid ) {
       this.formRegistraArticulos.markAllAsTouched();
-      this.alertaError('Revise que haya seleccionado una imagen y todos los campos este llenos, verifique por favor', 'error');
+      this.alertService.alertaError('Revise que haya seleccionado una imagen y todos los campos este llenos, verifique por favor', 'error');
       return;
     }
-    this.mandarForm();
+    this.alertService.alertConfirmAction('Registra nuevo articulo', '¿Seguro que desea registrar este nuevo articulo?')
+    .then( ( isConfirmed ) => {
+      if (isConfirmed) {
+        this.mandarForm();
+      }
+    });
   }
 
   private arrayBufferToDataURL( buffer: ArrayBuffer ): string {
@@ -91,34 +98,15 @@ export class FormRegistraArticulosComponent {
     return extensionesPermitidas.includes( extension! );
   }
 
-  private alertaError(titleAlert: String, tipoIcon: SweetAlertIcon): void{
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'center',
-      showConfirmButton: true,
-      confirmButtonText: 'OK',
-      timer: 4000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    });
-    Toast.fire({
-      icon: tipoIcon,
-      title: titleAlert
-    });
-  }
-
   private mandarForm(): void{
+    const decodedImg = new TextDecoder('utf-8').decode(this.formRegistraArticulos.get('inputBinaryImg')?.value);
     const data: newArticule = {
       cantidad: this.formRegistraArticulos.get('cantidad')?.value,
-      costo: this.formRegistraArticulos.get('costo')?.value,
-      descripcion: this.formRegistraArticulos.get('description')?.value,
-      imagen: this.formRegistraArticulos.get('inputBinaryImg')?.value,
+      precio: this.formRegistraArticulos.get('costo')?.value,
+      description: this.formRegistraArticulos.get('description')?.value,
+      fotografia: decodedImg,
     }
     this.dataFormulario.emit(data);
-    this.limpiaFormulario();
   }
 
 }
