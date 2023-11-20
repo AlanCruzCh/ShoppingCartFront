@@ -4,3 +4,9 @@ export interface newArticule{
   description: string;
   fotografia: string;
 }
+
+export interface newCarrito{
+  idArticulo: number;
+  cantidad: number;
+
+}

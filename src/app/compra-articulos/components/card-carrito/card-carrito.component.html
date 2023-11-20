@@ -1,0 +1,51 @@
+<div class="container-card" *ngFor="let item of dataCard">
+
+  <div class="container-img">
+
+    <img [src]="item.fotografia">
+
+  </div>
+
+  <div class="container-info">
+
+    <div class="container-description">
+
+      <div class="description-title">
+        <span> Descripcion del articulos</span>
+      </div>
+
+      <div class="description-body">
+        <p> {{item.description}} </p>
+      </div>
+
+    </div>
+
+    <div class="container-price">
+
+      <div class="price">
+        <span> Costo: $ {{item.precio}} </span>
+      </div>
+
+      <div class="cantidad">
+        <span> Cantidad: {{item.cantidad}} </span>
+      </div>
+
+      <div class="costo">
+        <span> Total: $ {{item.costo}} </span>
+      </div>
+
+    </div>
+
+    <div class="container-button">
+
+      <div class="example-button-row">
+        <button type="button" mat-raised-button color="primary" class="button-custom"
+          >Añadir / quitar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

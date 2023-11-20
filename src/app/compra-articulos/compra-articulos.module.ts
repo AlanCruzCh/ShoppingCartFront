@@ -7,6 +7,8 @@ import { NavegationBarComponent } from './components/navegation-bar/navegation-b
 import { CompraArticulosRoautingModule } from './compra-articulos-roauting.module';
 import { MaterialAngularModule } from '../material-angular/material-angular.module';
 import { SharedModule } from '../shared/shared.module';
+import { CarritoPageComponent } from './pages/carrito-page/carrito-page.component';
+import { CardCarritoComponent } from './components/card-carrito/card-carrito.component';
 
 
 
@@ -15,7 +17,9 @@ import { SharedModule } from '../shared/shared.module';
     CardArticuloComponent,
     LayoutCompraArticulosPageComponent,
     ArticulosDisponiblesPageComponent,
-    NavegationBarComponent
+    NavegationBarComponent,
+    CarritoPageComponent,
+    CardCarritoComponent,
   ],
   imports: [
     CommonModule,

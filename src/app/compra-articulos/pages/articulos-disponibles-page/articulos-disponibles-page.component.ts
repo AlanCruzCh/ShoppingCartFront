@@ -36,9 +36,10 @@ export class ArticulosDisponiblesPageComponent implements OnInit, OnDestroy{
     this.isLoading = true;
     this.compraArticulosService.buscaArticulosRegistrados(clave, page).subscribe({
       next: ( data: dataArticulesRegistered ) => {
-        console.log(data);
         this.isLoading = false;
         this.dataCards = [...data.content];
+        this.totalItems = data.totalElements;
+
       },
       error: ( error: ErrorRequest ) => {
         this.isLoading = false;

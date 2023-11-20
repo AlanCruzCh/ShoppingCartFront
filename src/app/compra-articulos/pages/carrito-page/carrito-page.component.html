@@ -1,0 +1,30 @@
+<div class="container-principal">
+
+  <div class="container-cards">
+    <compra-articulos-card-carrito [data]="dataCardsCarrito"></compra-articulos-card-carrito>
+  </div>
+
+  <div class="container-buttons">
+
+    <div class="example-button-row" [routerLink]="['/compra-articulos']">
+      <button type="button" mat-raised-button color="primary" class="button-custom">Regresar</button>
+    </div>
+
+    <div class="example-button-row">
+      <button type="button" mat-raised-button color="primary" class="button-custom">Eliminar</button>
+    </div>
+
+    <div class="costo">
+      <span> Total: $ {{costoTotal}} </span>
+    </div>
+
+  </div>
+
+  <div class="navegation-pages">
+    <mat-paginator [length]="totalItems" [pageSize]="5" aria-label="Select page">
+    </mat-paginator>
+  </div>
+
+</div>
+
+<shared-lazy-img *ngIf="isLoading"></shared-lazy-img>

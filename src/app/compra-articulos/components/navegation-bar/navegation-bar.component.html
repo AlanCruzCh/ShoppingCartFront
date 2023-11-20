@@ -10,11 +10,25 @@
 
   <div class="container-options">
 
-    <div class="contaimer-scart" matBadge="15" matBadgeColor="warn">
+    <ng-container *ngIf="numArrticulos; else articulosExist">
 
-      <img src="../../../../assets/icons/shopping_cart.svg" alt="Carrito de compras">
+      <div class="contaimer-scart" [matBadge]="numArrticulos" matBadgeColor="warn" [routerLink]="['/compra-articulos/productos-carrito']">
 
-    </div>
+        <img src="../../../../assets/icons/shopping_cart.svg" alt="Carrito de compras">
+
+      </div>
+
+    </ng-container>
+    <ng-template #articulosExist>
+
+      <div class="contaimer-scart" [routerLink]="['/compra-articulos/productos-carrito']">
+
+        <img src="../../../../assets/icons/shopping_cart.svg" alt="Carrito de compras">
+
+      </div>
+
+    </ng-template>
+
 
     <div class="button-row">
 

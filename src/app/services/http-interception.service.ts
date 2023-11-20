@@ -13,6 +13,7 @@ export class HttpInterceptionService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.log(error);
         let errorMessage: string;
         if (error.error && error.error.message) {
           errorMessage = error.error.message;

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { dataArticulesRegistered } from 'src/app/interfaces/data-json.interfces';
+import { dataArticulesCarritoRegistered, dataArticulesRegistered } from 'src/app/interfaces/data-json.interfces';
+import { newCarrito } from 'src/app/interfaces/formNewArticule.interfaces';
+import { SuccessRequest } from 'src/app/interfaces/response-request.interfaces';
 import { HttpRequestArticulosService } from 'src/app/services/http-request-articulos.service';
 
 @Injectable({
@@ -16,4 +18,11 @@ export class CompraArticulosService {
     return this.httpRequestArticulos.solicitaArticulosDisponibles(clave, page);
   }
 
+  public solicitaRegistraArticulo(data: newCarrito): Observable<SuccessRequest>{
+    return this.httpRequestArticulos.solicitaRegistraCarrito(data);
+  }
+
+  public solicitaArticulosCarrito(numPage: number): Observable<dataArticulesCarritoRegistered> {
+    return this.httpRequestArticulos.solicitaAriculosCarrito(numPage);
+  }
 }
