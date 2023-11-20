@@ -16,7 +16,7 @@ export class ArticulosDisponiblesPageComponent implements OnInit, OnDestroy{
   public dataCards: articule[] =  [];
   public totalItems: number = 0;
   public isLoading: boolean = false;
-
+  public filtroBusqueda: string = '';
 
 
   constructor (
@@ -32,6 +32,14 @@ export class ArticulosDisponiblesPageComponent implements OnInit, OnDestroy{
     this.subscriptionBuscaArticulos?.unsubscribe();
   }
 
+  public onPageChanged(event: any) {
+    this.buscaArtiulos('', event.pageIndex);
+  }
+
+  public solictaArticulos(): void{
+    this.buscaArtiulos(this.filtroBusqueda, 0);
+  }
+
   private buscaArtiulos(clave: string, page: number) {
     this.isLoading = true;
     this.compraArticulosService.buscaArticulosRegistrados(clave, page).subscribe({
@@ -39,7 +47,6 @@ export class ArticulosDisponiblesPageComponent implements OnInit, OnDestroy{
         this.isLoading = false;
         this.dataCards = [...data.content];
         this.totalItems = data.totalElements;
-
       },
       error: ( error: ErrorRequest ) => {
         this.isLoading = false;
@@ -49,9 +56,6 @@ export class ArticulosDisponiblesPageComponent implements OnInit, OnDestroy{
           this.alertService.alertResponseRequest('Error ' + error.codigoError, error.respuesta, 'warning');
         }
       }
-
-
-
     })
   }
 

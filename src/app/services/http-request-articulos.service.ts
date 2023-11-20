@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 
 import { environments } from 'src/environments/environments';
 
-import { newArticule, newCarrito } from '../interfaces/formNewArticule.interfaces';
+import { newArticule, newCarrito, updateArticuloCarrito } from '../interfaces/formNewArticule.interfaces';
 import { SuccessRequest } from '../interfaces/response-request.interfaces';
 import { DataJSONShowCarrito, dataArticulesCarritoRegistered, dataArticulesRegistered, dataJsonShowArticules } from '../interfaces/data-json.interfces';
 
@@ -82,8 +82,33 @@ export class HttpRequestArticulosService {
         return dataResponse;
       })
     );
-
   }
 
+  public solicitaEliminarCarrito(): Observable<SuccessRequest>{
+    return this.eliminaCarrito();
+  }
+
+  private eliminaCarrito(): Observable<SuccessRequest> {
+    const urlPeticion = `${this.servidorUrl}/limpia/carrito`;
+    return this.http.delete<SuccessRequest>(urlPeticion);
+  }
+
+  public solicitaEliminaArticuloCarrito(id: number): Observable<SuccessRequest>{
+    return this.eliminaArticuloCarrito(id);
+  }
+
+  private eliminaArticuloCarrito(id: number): Observable<SuccessRequest> {
+    const urlPeticion = `${this.servidorUrl}/limpia/carrito/articulo/${id}`;
+    return this.http.delete<SuccessRequest>(urlPeticion);
+  }
+
+  public solicitaActualizarArticuloCarrito(data: updateArticuloCarrito): Observable<SuccessRequest> {
+    return this.actualizarArticuloCarrito(data);
+  }
+
+  private actualizarArticuloCarrito(data: updateArticuloCarrito): Observable<SuccessRequest> {
+    const urlPeticion = `${this.servidorUrl}/actualiza/cantidad/carrito/articulo`;
+    return this.http.put<SuccessRequest>(urlPeticion, data);
+  }
 
 }

@@ -1,11 +1,19 @@
 <div class="container-principal">
 
+  <div class="container-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Filtro</mat-label>
+      <input matInput placeholder=" " [(ngModel)]="filtroBusqueda" (keyup.enter)="solictaArticulos()">
+      <mat-icon matSuffix (click)="solictaArticulos()" >search</mat-icon>
+    </mat-form-field>
+  </div>
+
   <div class="container-cards">
     <compra-articulos-card-articulo [data]="dataCards"></compra-articulos-card-articulo>
   </div>
 
   <div class="navegation-pages">
-    <mat-paginator [length]="totalItems" [pageSize]="5" aria-label="Select page">
+    <mat-paginator [length]="totalItems" [pageSize]="5" aria-label="Select page" (page)="onPageChanged($event)">
     </mat-paginator>
   </div>
 

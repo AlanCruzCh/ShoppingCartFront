@@ -38,9 +38,19 @@
 
     <div class="container-button">
 
-      <div class="example-button-row">
+      <div class="example-button-row" (click)="solicitarNumProductos(item.idArticulo, item.idCarrito, 'Añadir')">
         <button type="button" mat-raised-button color="primary" class="button-custom"
-          >Añadir / quitar
+          >Añadir
+        </button>
+      </div>
+
+      <div class="example-button-row" (click)="solicitarNumProductos(item.idArticulo, item.idCarrito, 'Reducir')">
+        <button type="button" mat-raised-button color="primary" class="button-custom">Quitar
+        </button>
+      </div>
+
+      <div class="example-button-row" (click)="confirmaEliminacion(item.idCarrito)">
+        <button type="button" mat-raised-button color="primary" class="button-custom">Borrar
         </button>
       </div>
 

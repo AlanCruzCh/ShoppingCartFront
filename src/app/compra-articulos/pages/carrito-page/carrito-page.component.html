@@ -1,7 +1,11 @@
 <div class="container-principal">
 
   <div class="container-cards">
-    <compra-articulos-card-carrito [data]="dataCardsCarrito"></compra-articulos-card-carrito>
+    <compra-articulos-card-carrito
+      [data]="dataCardsCarrito"
+      (elimiarArticulo)="eliminaArticuloCarrito($event)"
+      (actualizaCanbtidadArticulo)="actualizaCarritoArticulo($event)">
+    </compra-articulos-card-carrito>
   </div>
 
   <div class="container-buttons">
@@ -10,7 +14,7 @@
       <button type="button" mat-raised-button color="primary" class="button-custom">Regresar</button>
     </div>
 
-    <div class="example-button-row">
+    <div class="example-button-row" (click)="confirmaEliminacion()">
       <button type="button" mat-raised-button color="primary" class="button-custom">Eliminar</button>
     </div>
 
@@ -21,7 +25,11 @@
   </div>
 
   <div class="navegation-pages">
-    <mat-paginator [length]="totalItems" [pageSize]="5" aria-label="Select page">
+    <mat-paginator
+      [length]="totalItems"
+      [pageSize]="5"
+      aria-label="Select page"
+      (page)="onPageChanged($event)">
     </mat-paginator>
   </div>
 

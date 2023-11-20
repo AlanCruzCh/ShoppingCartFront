@@ -10,3 +10,10 @@ export interface newCarrito{
   cantidad: number;
 
 }
+
+export interface updateArticuloCarrito{
+  cantidad: number;
+  idArticulo: number;
+  idCarrito: number;
+  operacion: string;
+}

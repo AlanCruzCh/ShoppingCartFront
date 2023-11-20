@@ -56,9 +56,10 @@ export class CardArticuloComponent implements OnChanges {
   }
 
   private actualizaNumArticulosInCarrito(){
-    let numArticulos = 0;
-    if (localStorage.getItem('nucArtCarrito') === undefined) {
-      localStorage.setItem('nucArtCarrito', JSON.stringify("1"));
+    let numArticulos = 1;
+    console.log(localStorage.getItem('nucArtCarrito'));
+    if (localStorage.getItem('nucArtCarrito') == null) {
+      localStorage.setItem('nucArtCarrito', JSON.stringify( numArticulos ));
     }
     else{
       numArticulos = parseInt( JSON.parse( localStorage.getItem('nucArtCarrito')! ) );

@@ -64,5 +64,21 @@ export class AlertService {
     }
   }
 
+  public async eliminarProductos(): Promise<number> {
+    let inputValue = 1;
+    const result = await Swal.fire({
+      title: 'Cuantos productos desea eliminar de este articulo',
+      input: 'number',
+      inputLabel: 'Ingrese una cantidad',
+      showCancelButton: true,
+      inputValue,
+    });
+    if (result.isConfirmed) {
+      return parseInt(result.value);
+    } else {
+      return -1;
+    }
+  }
+
 
 }

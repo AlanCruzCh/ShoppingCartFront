@@ -9,6 +9,7 @@ import { MaterialAngularModule } from '../material-angular/material-angular.modu
 import { SharedModule } from '../shared/shared.module';
 import { CarritoPageComponent } from './pages/carrito-page/carrito-page.component';
 import { CardCarritoComponent } from './components/card-carrito/card-carrito.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +26,8 @@ import { CardCarritoComponent } from './components/card-carrito/card-carrito.com
     CommonModule,
     CompraArticulosRoautingModule,
     MaterialAngularModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class CompraArticulosModule { }
