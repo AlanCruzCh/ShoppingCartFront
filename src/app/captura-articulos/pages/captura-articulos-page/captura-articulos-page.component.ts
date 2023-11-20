@@ -11,18 +11,23 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 })
 export class CapturaArticulosPageComponent {
 
+  public isLoading: boolean = false;
+
   constructor (
     private capturaArticuloService: CapturaArticulosService,
     private alertService: AlertService,
   ) { }
 
   public obtieneDatos(data: newArticule) {
+    this.isLoading = true;
     this.capturaArticuloService.registraNuevoArticulo(data)
     .subscribe({
       next: (data: SuccessRequest) => {
+        this.isLoading = false;
         this.alertService.alertResponseRequest('Exito', data.message, 'success');
       },
       error: (error: ErrorRequest) => {
+        this.isLoading = false;
         if (error.codigoError >= 400 && error.codigoError < 500) {
           this.alertService.alertResponseRequest('Error ' + error.codigoError, error.respuesta, 'warning');
         } else {

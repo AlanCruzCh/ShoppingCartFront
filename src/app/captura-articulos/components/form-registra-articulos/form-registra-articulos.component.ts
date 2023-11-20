@@ -1,8 +1,11 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 import { newArticule } from 'src/app/interfaces/formNewArticule.interfaces';
 import { AlertService } from 'src/app/shared/services/alert.service';
+
+import { Storage, ref, uploadBytes, getDownloadURL, listAll, ListResult } from '@angular/fire/storage';
 
 @Component({
   selector: 'captura-articulos-form-registra-articulos',
@@ -22,34 +25,21 @@ export class FormRegistraArticulosComponent {
     costo: [ '', [Validators.required] ],
     description: [ '', [Validators.required] ],
     inputImgUploading: [null , [Validators.required] ],
-    inputBinaryImg: [null, [Validators.required] ],
+    img: ['', [Validators.required] ],
   });
+  public urlImagenes: string[] = [];
+  public sanitizedImageUrl: SafeUrl = '';
+  public isLoading: boolean = false;
 
   constructor (
     private fb: FormBuilder,
     private alertService: AlertService,
+    private storage: Storage,
+    private sanitizer: DomSanitizer
   ) { }
 
   public activaInput(): void{
     this.fileInput.nativeElement.click();
-  }
-
-  public cargandoImg(event: any) {
-    const file: File = event.target.files[0];
-    if (file && this.esTipoDeImagen(file.name)) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const binaryArray = reader.result as ArrayBuffer;
-        const dataUrl = this.arrayBufferToDataURL(binaryArray);
-        this.imgLoadFromNavegator = dataUrl;
-        this.formRegistraArticulos.patchValue({
-          inputBinaryImg: binaryArray,
-        });
-      };
-      reader.readAsArrayBuffer(file);
-    } else {
-      this.alertService.alertaError('Por favor, selecciona un archivo de imagen con extensión PNG o png', 'warning');
-    }
   }
 
   public validaCampoForm( nombreCampo: string): boolean | null {
@@ -69,7 +59,40 @@ export class FormRegistraArticulosComponent {
   }
 
   public limpiaFormulario(): void {
-    this.formRegistraArticulos.reset({cantidad: '', costo: '', description: '', inputImgUploading: null, inputBinaryImg: null});
+    this.formRegistraArticulos.reset({cantidad: '', costo: '', description: '', inputImgUploading: null, img: ''});
+    this.sanitizedImageUrl = '';
+  }
+
+  public uploadImg($event: any) {
+    this.isLoading = true;
+    const imgFile = $event.target.files[0];
+    const fileNameWithExtension: string = imgFile.name;
+    const fileNameWithoutExtension: string = fileNameWithExtension.split('.')[0];
+    const imgRef = ref(this.storage, `/imgArticles/article/${fileNameWithoutExtension}/${fileNameWithoutExtension}`)
+
+    uploadBytes(imgRef, imgFile).then(respuesta => {
+      this.obtenerUrl(fileNameWithoutExtension);
+    }).catch(() => {
+      this.isLoading = false;
+      this.alertService.alertaError('Se produjo un erro al subir la imagen', 'error');
+    });
+  }
+
+  public obtenerUrl(nameImg: string) {
+    const imgRef = ref(this.storage, `/imgArticles/article/${nameImg}/`)
+    listAll(imgRef).then(async imagenes => {
+      for (let item of imagenes.items) {
+        const urlImagen = await getDownloadURL(item);
+        this.sanitizedImageUrl = this.sanitizer.bypassSecurityTrustUrl(urlImagen);
+        this.formRegistraArticulos.patchValue({
+          img: urlImagen,
+        });
+        this.isLoading = false;
+      }
+    }).catch(() => {
+      this.isLoading = false;
+      this.alertService.alertaError('Se produjo un erro al obtener la direccion url de la imagen', 'error');
+    });
   }
 
   public gurdaDatosForm(): void {
@@ -86,27 +109,15 @@ export class FormRegistraArticulosComponent {
     });
   }
 
-  private arrayBufferToDataURL( buffer: ArrayBuffer ): string {
-    const blob = new Blob( [buffer] , { type: 'image/png' } ); // Puedes ajustar el tipo MIME según el tipo de archivo
-    const urlCreator = window.URL || window.webkitURL;
-    return urlCreator.createObjectURL( blob );
-  }
-
-  private esTipoDeImagen( nombreArchivo: string ): boolean {
-    const extensionesPermitidas = ['png'];
-    const extension = nombreArchivo.split('.').pop()?.toLowerCase();
-    return extensionesPermitidas.includes( extension! );
-  }
-
   private mandarForm(): void{
-    const decodedImg = new TextDecoder('utf-8').decode(this.formRegistraArticulos.get('inputBinaryImg')?.value);
     const data: newArticule = {
       cantidad: this.formRegistraArticulos.get('cantidad')?.value,
       precio: this.formRegistraArticulos.get('costo')?.value,
       description: this.formRegistraArticulos.get('description')?.value,
-      fotografia: decodedImg,
+      fotografia: this.formRegistraArticulos.get('img')?.value,
     }
     this.dataFormulario.emit(data);
+    this.limpiaFormulario();
   }
 
 }

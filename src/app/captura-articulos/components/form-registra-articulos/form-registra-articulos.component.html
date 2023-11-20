@@ -13,7 +13,7 @@
         <div class="section-img">
 
           <div class="img-upload">
-            <img [src]="imgLoadFromNavegator" *ngIf="imgLoadFromNavegator">
+            <img [src]="sanitizedImageUrl" *ngIf="sanitizedImageUrl">
           </div>
 
           <div class="button-upload">
@@ -48,7 +48,7 @@
         </div>
 
 
-        <input type="file" #inputImgUploading name="inputImgUploading" id="inputImgUploading" (change)="cargandoImg($event)" formControlName="inputImgUploading" class="oculta-input">
+        <input type="file" #inputImgUploading name="inputImgUploading" id="inputImgUploading" (change)="uploadImg($event)" formControlName="inputImgUploading" class="oculta-input">
 
       </div>
 
@@ -70,3 +70,5 @@
 
 
 </div>
+
+<shared-lazy-img *ngIf="isLoading"></shared-lazy-img>

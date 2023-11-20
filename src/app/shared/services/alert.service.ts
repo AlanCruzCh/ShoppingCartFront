@@ -48,4 +48,22 @@ export class AlertService {
     return result.isConfirmed;
   }
 
+  public async agregaProductos(): Promise<string>{
+    let inputValue = '';
+    const result = await Swal.fire({
+      title: 'Cuantos productos desea añadir de este articulo',
+      input: "number",
+      inputLabel: "Ingrese una cantidad",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          inputValue = value;
+          return inputValue;
+        }
+        return '';
+      }
+    });
+    return result.value;
+  }
+
 }

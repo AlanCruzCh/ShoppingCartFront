@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'compra-articulos',
-    loadChildren: () => import('./captura-articulos/captura-articulos.module').then(m => m.CapturaArticulosModule),
+    loadChildren: () => import('./compra-articulos/compra-articulos.module').then(m => m.CompraArticulosModule),
   },
   {
     path: 'inicio',

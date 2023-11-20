@@ -1,0 +1,110 @@
+.container-navegation{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #0d7378;
+  position: relative;
+  z-index: 1000;
+}
+
+.container-logo{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  z-index: 100;
+}
+
+.container-options{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+
+.title-logo {
+  line-height: 1.2;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}
+
+.contaimer-scart{
+  margin-right: 30px;
+  color: white;
+}
+
+.contaimer-scart img {
+  color: white;
+}
+
+.button-row{
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .container-logo {
+    width: 25%;
+  }
+
+  .container-options {
+    width: 75%;
+  }
+
+  .title-logo {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+  .container-logo {
+      width: 30%;
+  }
+
+  .container-options {
+    width: 70%;
+  }
+
+  .title-logo {
+    font-size: 1.5rem;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+
+  .container-logo {
+    width: 35%;
+  }
+
+  .container-options {
+    width: 65%;
+  }
+
+  .title-logo {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  .container-logo{
+    width: 35%;
+  }
+
+  .container-options{
+    width: 65%;
+  }
+
+  .title-logo{
+    font-size: 1.3rem;
+  }
+
+}

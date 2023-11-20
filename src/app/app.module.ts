@@ -10,6 +10,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MaterialAngularModule } from './material-angular/material-angular.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptionService } from './services/http-interception.service';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { environments } from 'src/environments/environments';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { HttpInterceptionService } from './services/http-interception.service';
     BrowserAnimationsModule,
     MaterialAngularModule,
     HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environments.firebase)),
+    provideStorage(() => getStorage()),
   ],
   providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},

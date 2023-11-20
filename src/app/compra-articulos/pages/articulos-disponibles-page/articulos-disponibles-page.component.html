@@ -1,1 +1,15 @@
-<p>articulos-disponibles-page works!</p>
+<div class="container-principal">
+
+  <div class="container-cards">
+    <compra-articulos-card-articulo [data]="dataCards"></compra-articulos-card-articulo>
+  </div>
+
+  <div class="navegation-pages">
+    <mat-paginator [length]="100" [pageSize]="10" aria-label="Select page">
+    </mat-paginator>
+  </div>
+
+</div>
+
+<shared-lazy-img *ngIf="isLoading"></shared-lazy-img>
+

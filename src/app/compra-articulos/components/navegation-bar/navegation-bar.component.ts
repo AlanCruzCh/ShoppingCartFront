@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-navegation-bar',
+  selector: 'compra-articulos-navegation-bar',
   templateUrl: './navegation-bar.component.html',
   styleUrls: ['./navegation-bar.component.css']
 })

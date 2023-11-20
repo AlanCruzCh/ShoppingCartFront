@@ -19,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     CapturaArticulosRoautingModule,
     MaterialAngularModule,
     ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class CapturaArticulosModule { }
