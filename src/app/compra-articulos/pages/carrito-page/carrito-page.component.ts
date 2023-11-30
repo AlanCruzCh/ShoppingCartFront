@@ -111,7 +111,6 @@ export class CarritoPageComponent implements OnInit, OnDestroy{
     this.isLoading = true;
     this.subscriptionArticulosCarrito = this.compraArticuloService.solicitaArticulosCarrito(numPage).subscribe({
       next: (data: dataArticulesCarritoRegistered) => {
-        console.log(data);
         this.isLoading = false;
         this.dataCardsCarrito = [...data.content];
         this.totalItems = data.totalElements;

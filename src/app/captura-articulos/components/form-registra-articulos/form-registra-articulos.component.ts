@@ -117,7 +117,6 @@ export class FormRegistraArticulosComponent {
       fotografia: this.formRegistraArticulos.get('img')?.value,
     }
     this.dataFormulario.emit(data);
-    this.limpiaFormulario();
   }
 
 }

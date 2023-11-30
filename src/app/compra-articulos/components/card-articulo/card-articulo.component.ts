@@ -57,7 +57,6 @@ export class CardArticuloComponent implements OnChanges {
 
   private actualizaNumArticulosInCarrito(){
     let numArticulos = 1;
-    console.log(localStorage.getItem('nucArtCarrito'));
     if (localStorage.getItem('nucArtCarrito') == null) {
       localStorage.setItem('nucArtCarrito', JSON.stringify( numArticulos ));
     }

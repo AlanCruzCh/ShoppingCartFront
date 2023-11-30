@@ -33,7 +33,6 @@ export class CardCarritoComponent implements OnChanges{
     this.alertService.alertConfirmAction('Eliminando carrito', '¿Seguro que desea eliminar este articulo del carrito?')
     .then((isConfirmed) => {
       if (isConfirmed) {
-        console.log(id);
         this.elimiarArticulo.emit(id);
       }
     });
@@ -47,8 +46,8 @@ export class CardCarritoComponent implements OnChanges{
             idArticulo,
             idCarrito,
             operacion,
-            cantidad: numProductos };
-            console.log(data);
+            cantidad: numProductos
+          };
           this.actualizaCanbtidadArticulo.emit(data);
         }
       }
