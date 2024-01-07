@@ -1,5 +1,5 @@
 export const environments = {
-  servidorUrl: 'http://localhost:8500',
+  servidorUrl: 'http://172.174.237.200:8500/api',
   firebase: {
     "projectId": "shoppingcart-507f2",
     "appId": "1:1053456364550:web:9109da434d149a0d137f87",

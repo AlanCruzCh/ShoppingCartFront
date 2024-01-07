@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ArticulosCarrito } from 'src/app/interfaces/data-json.interfces';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { CompraArticulosService } from '../../services/compra-articulos.service';
 import { updateArticuloCarrito } from 'src/app/interfaces/formNewArticule.interfaces';
 
 @Component({

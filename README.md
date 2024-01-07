@@ -32,3 +32,15 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Swet Alert 2, ejecute npm install sweetalert2 --save
 
 Material Angular, ejecute ng add @angular/material
+
+## Deployment in Production
+
+### Comando para crear la imagen de la aplicacion
+
+docker build -t shopping-cart-image .
+
+
+### Comando para levantar la aplicacion web en el contenedor de docker
+
+docker run -d --name SHOPPING-CART-FRONT -p 8080:90 --network=SHOPPING-CART-NETWORK shopping-cart-image
+
